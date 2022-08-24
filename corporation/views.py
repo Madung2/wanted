@@ -12,11 +12,7 @@ class RecruitmentView(APIView):
 
 
     def post(self, request):
-        # user = request.user
-        # request.data['user'] = user.id
         request.data['position'] = Position.objects.get(name=request.data['position']).id
-        print(TechStack.objects.get(name=request.data['tech_stack']).id)
-
         request.data['tech_stack']=TechStack.objects.get(name=request.data['tech_stack']).id
         serializer = RecruitmentSerializer(data=request.data)
         if serializer.is_valid():
