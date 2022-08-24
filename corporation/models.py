@@ -31,6 +31,8 @@ class Position(models.Model):
 class Recruitment(models.Model):
     corporation = models.ForeignKey(Corporation, verbose_name='회사명', on_delete=models.CASCADE)
     position = models.ForeignKey(Position, verbose_name='채용포지션', on_delete=models.SET_NULL, null=True)
+    country = models.CharField("국가", max_length=128, default='한국')
+    region = models.CharField("지역", max_length=128, default='서울')
     recompense = models.IntegerField('채용보상금')
     content = models.TextField('채용내용')
     tech_stack = models.ForeignKey(TechStack, verbose_name='사용기술', on_delete=models.CASCADE)
