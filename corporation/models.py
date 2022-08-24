@@ -1,6 +1,6 @@
 from django.db import models
 from user.models import User
-    
+
 class Country(models.Model):
     name = models.CharField('국가', max_length=50)
     def __str__(self):
@@ -29,7 +29,7 @@ class Position(models.Model):
         return self.name
 
 class Recruitment(models.Model):
-    corporation = models.ForeignKey(Corporation, verbose_name='회사_id', on_delete=models.CASCADE)
+    corporation = models.ForeignKey(Corporation, verbose_name='회사명', on_delete=models.CASCADE)
     position = models.ForeignKey(Position, verbose_name='채용포지션', on_delete=models.SET_NULL, null=True)
     recompense = models.IntegerField('채용보상금')
     content = models.TextField('채용내용')
