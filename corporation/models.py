@@ -1,20 +1,9 @@
 from django.db import models
 from user.models import User
 
-class Country(models.Model):
-    name = models.CharField('국가', max_length=50)
-    def __str__(self):
-        return self.name
-    
-class Region(models.Model):
-    name = models.CharField('지역', max_length=50)
-    def __str__(self):
-        return self.name
-        
+
 class Corporation(models.Model):
     name = models.CharField('회사', max_length=50)
-    country = models.ForeignKey(Country, verbose_name='국가', on_delete=models.SET_NULL, null=True)
-    region = models.ForeignKey(Region, verbose_name='지역', on_delete=models.SET_NULL, null=True)
     def __str__(self):
         return self.name
     

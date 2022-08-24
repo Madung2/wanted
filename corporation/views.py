@@ -49,4 +49,17 @@ class MyRecruitmentView(APIView):
         return Response({"massege" : "삭제 성공"},status=status.HTTP_200_OK)
 
 
+class SearchView(APIView):
+
+    def get(self, request):
+        search_data = self.request.query_params.get('search')
+
+        searched_data = (
+            Recruitment.objects.filter(corporation__name__icontains=search_data)
+            |Recruitment.objects.filter(content__icontains=search_data)
+            |Recruitment.objects.filter(tech_stack__name__icontains=search_data)
+            )
+        return Response(RecruitmentSerializer(searched_data, many=True).data, status=status.HTTP_200_OK)
+
+
 
