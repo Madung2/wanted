@@ -55,7 +55,8 @@ class SearchView(APIView):
             |Recruitment.objects.filter(content__icontains=search_data)
             |Recruitment.objects.filter(tech_stack__name__icontains=search_data)
             )
-        return Response(RecruitmentSerializer(searched_data, many=True).data, status=status.HTTP_200_OK)
+        serializer= RecruitmentSerializer(searched_data, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class RecruitingView(APIView):
     def post(self, request):

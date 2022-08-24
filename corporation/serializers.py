@@ -22,7 +22,6 @@ class RecruitmentSerializer(serializers.ModelSerializer):
         recruitments = Recruitment.objects.filter(corporation=obj.corporation.id)
         return [recruitment.id for recruitment in recruitments]
 
-
     class Meta:
         model = Recruitment
         fields = ['id', 'company_name', 'position_name', 'country','region','stack_name', 'corporation','position','recompense','content','tech_stack', 'related_recruitments']
