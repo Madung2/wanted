@@ -28,11 +28,11 @@ class Position(models.Model):
         return self.name
 
 class Recruitment(models.Model):
-    corporation = models.ForeignKey(Corporation, verbose_name='회사', on_delete=models.CASCADE)
+    corporation = models.ForeignKey(Corporation, verbose_name='회사_id', on_delete=models.CASCADE)
     position = models.ForeignKey(Position, verbose_name='채용포지션', on_delete=models.SET_NULL, null=True)
-    tech_stack = models.ManyToManyField(TechStack, verbose_name='기술스택', related_name='stacks')
     recompense = models.IntegerField('채용보상금')
     content = models.TextField('채용내용')
+    tech_stack = models.ManyToManyField(TechStack, verbose_name='사용기술', related_name='stacks')
     def __str__(self):
         return f'{str(self.corporation)} / {str(self.position)}'
     
