@@ -5,3 +5,7 @@ class RecruitmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recruitment
         fields = '__all__'
+        # extra_kwargs= {
+        #     "corporation": {"write_only": True},
+        #     "corporation": {"write_only": True},
+        # }

@@ -33,7 +33,7 @@ class Recruitment(models.Model):
     position = models.ForeignKey(Position, verbose_name='채용포지션', on_delete=models.SET_NULL, null=True)
     recompense = models.IntegerField('채용보상금')
     content = models.TextField('채용내용')
-    tech_stack = models.ManyToManyField(TechStack, verbose_name='사용기술', related_name='stacks')
+    tech_stack = models.ForeignKey(TechStack, verbose_name='사용기술', on_delete=models.CASCADE)
     def __str__(self):
         return f'{str(self.corporation)} / {str(self.position)}'
     
