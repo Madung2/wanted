@@ -1,7 +1,10 @@
 from rest_framework import serializers
-from .models import Recruitment
+from .models import Recruitment, Recruiter
 
-
+class RecruiterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recruiter
+        fields = '__all__'
 
 class RecruitmentSerializer(serializers.ModelSerializer):
     company_name = serializers.SerializerMethodField()

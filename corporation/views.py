@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Recruitment, TechStack, Position
-from .serializers import RecruitmentSerializer
+from .serializers import RecruitmentSerializer, RecruiterSerializer
 # Create your views here.
 class RecruitmentView(APIView):
     def get(self, request):
@@ -56,6 +56,16 @@ class SearchView(APIView):
             |Recruitment.objects.filter(tech_stack__name__icontains=search_data)
             )
         return Response(RecruitmentSerializer(searched_data, many=True).data, status=status.HTTP_200_OK)
+
+class RecruitingView(APIView):
+    def post(self, request):
+        serializer = RecruiterSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 

@@ -30,6 +30,6 @@ class Recruitment(models.Model):
     
 class Recruiter(models.Model):
     user = models.ForeignKey('user.User', verbose_name='인사담당자', on_delete=models.CASCADE)
-    recruitment = models.ManyToManyField(Recruitment, verbose_name='채용공고', related_name='recruitments')
+    recruitment = models.ForeignKey(Recruitment, verbose_name='채용공고', on_delete=models.CASCADE, default=1)
     def __str__(self):
         return str(self.user)
