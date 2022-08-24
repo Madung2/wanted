@@ -1,4 +1,5 @@
 from django.db import models
+from user.models import User
     
 class Country(models.Model):
     name = models.CharField('국가', max_length=50)
@@ -37,7 +38,7 @@ class Recruitment(models.Model):
         return f'{str(self.corporation)} / {str(self.position)}'
     
 class Recruiter(models.Model):
-    user = models.ForeignKey('users.User', verbose_name='인사담당자', on_delete=models.CASCADE)
+    user = models.ForeignKey('user.User', verbose_name='인사담당자', on_delete=models.CASCADE)
     recruitment = models.ManyToManyField(Recruitment, verbose_name='채용공고', related_name='recruitments')
     def __str__(self):
         return str(self.user)
