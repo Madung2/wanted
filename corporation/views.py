@@ -3,12 +3,23 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Recruitment, TechStack, Position
 from .serializers import RecruitmentSerializer, RecruiterSerializer
+from .service.service import get_job_post
+from django.db import connection
+# from django.test.utils import CaptureQueriesContext
+
 # Create your views here.
 class RecruitmentView(APIView):
     def get(self, request):
-        recruitments = Recruitment.objects.all()
-        serializer = RecruitmentSerializer(recruitments, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        recruitments = (Recruitment.objects
+        .select_related("tech_stack")
+        .select_related("position")
+        .select_related("corporation")
+        .all())
+        serializer = RecruitmentSerializer(recruitments, many=True).data
+        # with CaptureQueriesContext(connection) as ctx:
+        serializer=get_job_post()        
+        queries=connection.queries
+        return Response(serializer, status=status.HTTP_200_OK)
 
 
     def post(self, request):
